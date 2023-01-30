@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- CommunityComments.java vo Class 생성 -->
+<!-- 1. 댓글 글쓰기 : insert -->
+<!-- 2. 댓글 글삭제 : delete -->
+<mapper namespace="communityComments">		<!-- namespace = 정의된 id를 그룹화 -->
+	<insert id=""></insert>
+	<update id=""></update>
+	<delete id=""></delete>
+	<select id=""></select>
+</mapper>

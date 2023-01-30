@@ -2,9 +2,14 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper>
+<!-- Community.java vo Class 생성 -->
+<!-- 1. 메인 글쓰기 : insert -->
+<!-- 2. 메인 글수정 : update -->
+<!-- 3. 메인 글삭제 : delete -->
+<!-- 4. 메인 글보기 : select -->
+<mapper namespace="community">		<!-- namespace = 정의된 id를 그룹화 -->
 	<insert id=""></insert>
 	<update id=""></update>
+	<delete id=""></delete>
 	<select id=""></select>
-
 </mapper>
