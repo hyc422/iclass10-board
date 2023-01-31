@@ -10,7 +10,7 @@ https://mybatis.org/mybatis-3/ko/getting-started.html 참고
  	<!-- github등과같이 공유할 때 db.properties 파일은 보안이 필요한 데이터로 제회 -->
  	<!-- properties 파일의 값이 바뀔때 파일명만 변경하는 등 관리가 쉬움 -->
   <properties resource="mybatis/db.properties"/>
-  
+  <!-- package가 다른 예시 resource="org/iclass/mybatis/db.properties -->
   <!--  db 연결정보 -->
   <environments default="development">
     <environment id="development">
@@ -31,6 +31,7 @@ https://mybatis.org/mybatis-3/ko/getting-started.html 참고
   <mappers>
   	<!-- 실행할 SQL 쿼리 저장한 파일. mapper파일위치와 파일명 오류나지 않도록 확인!! 테이블컬럼과 자바객체 변수(프로퍼티) 를 바로 매핑. -->
     <mapper resource="mybatis/community.xml"/>
+    <mapper resource="mybatis/communityComments.xml"/>
     <!-- resource 속성일 때 파일의 package명은 .이 아닌 / 기호 사용 -->
     <!-- sql mapper 파일은 여러개 사용될 수 있습니다. -->
   </mappers>
