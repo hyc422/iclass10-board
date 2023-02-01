@@ -2,6 +2,8 @@ package org.iclass;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.List;
+
 import org.iclass.dao.CommunityCommentsDao;
 import org.iclass.dao.CommunityDao;
 import org.iclass.vo.Community;
@@ -18,7 +20,7 @@ class BoardTest
 	CommunityCommentsDao commentsdao = CommunityCommentsDao.getInstance();
 	
 	@Order(1)
-	@DisplayName("메인글 insert - idx_seq = 22")
+	@DisplayName("메인글 insert의 idx = max+1")
 	@Test
 	void insertMain()
 	{
@@ -28,15 +30,21 @@ class BoardTest
 								.content("자바 정석으로 공부")
 								.build();
 		
-		assertEquals(communitydao.insert(vo), 22);
+		int result = communitydao.maxOf();
+		communitydao.insert(vo);
+		assertEquals(vo.getIdx(), result+1);
 	}	// test end
 	
 	@Order(2)
-	@DisplayName("메인글 SelectByIdx - writer : 홍용치")
+	@DisplayName("메인글 목록 : list 크기 = count")
 	@Test
-	void selectByIdx()
+	void mainList()
 	{
-		assertEquals(communitydao.selectByIdx(22).getWriter(), "홍용치");
+		List<Community> list = communitydao.list();
+		
+		int count = communitydao.count();
+		
+		assertEquals(list.size(), count);
 	}	// test end
 	
 	//@Order(3)
