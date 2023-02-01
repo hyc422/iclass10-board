@@ -1,5 +1,7 @@
 package org.iclass.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.iclass.vo.Community;
 
@@ -16,12 +18,12 @@ public class CommunityDao
 	public long insert(Community vo)
 	{
 		SqlSession mapper = SqlSessionBean.getSession();
-		long result = mapper.insert("community.insert",vo);
+		mapper.insert("community.insert",vo);
 		
 		mapper.commit();
 		mapper.close();
 		
-		return result;
+		return vo.getIdx();		// mapper.xml에서 selectkey로 sequence값을 vo Object에 저장
 	}	// method end;
 	
 	public int update(Community vo)
@@ -54,5 +56,57 @@ public class CommunityDao
 		mapper.close();
 		
 		return vo;
+	}	// method end
+	
+	public int count()
+	{
+		SqlSession mapper = SqlSessionBean.getSession();
+		int result = mapper.selectOne("community.count");
+		
+		mapper.close();
+		
+		return result;
+	}	// method end
+	
+	public int setReadCount(int idx)
+	{
+		SqlSession mapper = SqlSessionBean.getSession();
+		int result = mapper.update("community.setReadCount", idx);
+		
+		mapper.commit();
+		mapper.close();
+		
+		return result;
+	}	// method end
+	
+	public int setCommentCount(int idx)
+	{
+		SqlSession mapper = SqlSessionBean.getSession();
+		int result = mapper.update("community.setCommentCount", idx);
+		
+		mapper.commit();
+		mapper.close();
+		
+		return result;
+	}	// method end
+	
+	public int maxOf()
+	{
+		SqlSession mapper = SqlSessionBean.getSession();
+		int result = mapper.selectOne("community.maxOf");
+		
+		mapper.close();
+		
+		return result;
+	}	// method end
+	
+	public List<Community> list()
+	{
+		SqlSession mapper = SqlSessionBean.getSession();
+		List<Community> list = mapper.selectList("community.list");
+		
+		mapper.close();
+		
+		return list;
 	}	// method end
 }	// Class end

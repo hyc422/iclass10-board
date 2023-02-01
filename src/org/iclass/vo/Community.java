@@ -16,7 +16,7 @@ import lombok.ToString;
 public class Community 
 {
 	private long idx;
-	private String Writer;
+	private String writer;
 	private String title;
 	private String content;
 	private int readCount;

@@ -1,5 +1,7 @@
 package org.iclass.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.iclass.vo.CommunityComments;
 
@@ -29,6 +31,36 @@ public class CommunityCommentsDao
 		int result = mapper.delete("communityComments.delete",idx);
 		
 		mapper.commit();
+		mapper.close();
+		
+		return result;
+	}	// method end
+	
+	public List<CommunityComments> comments(int mref)
+	{
+		SqlSession mapper = SqlSessionBean.getSession();
+		List<CommunityComments> commentList = mapper.selectList("communityComments.comments", mref);
+		
+		mapper.close();
+		
+		return commentList;
+	}	// method end
+	
+	public int commentsCount(int mref)
+	{
+		SqlSession mapper = SqlSessionBean.getSession();
+		int result = mapper.selectOne("communityComments.commentsCount", mref);
+		
+		mapper.close();
+		
+		return result;
+	}	// method end
+	
+	public int maxOf() 
+	{
+		SqlSession mapper = SqlSessionBean.getSession();
+		int result = mapper.selectOne("communityComments.maxOf");
+		
 		mapper.close();
 		
 		return result;

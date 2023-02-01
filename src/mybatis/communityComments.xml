@@ -6,12 +6,32 @@
 <!-- 1. 댓글 글쓰기 : insert -->
 <!-- 2. 댓글 글삭제 : delete -->
 <mapper namespace="communityComments">		<!-- namespace = 정의된 id를 그룹화 -->
-	<insert id="insert" parameterType="org.iclass.vo.CommunityComments" keyProperty="idx" keyColumn="idx" useGeneratedKeys="true">
+	<insert id="insert" parameterType="org.iclass.vo.CommunityComments" keyProperty="idx" keyColumn="idx" useGeneratedKeys="false">
 		INSERT INTO communityComments (idx,mref,writer,content) 
 		VALUES (comment_idx_seq.nextval,#{mref},#{writer},#{content})
+		<selectKey keyProperty="idx" resultType="long" order="AFTER">
+			SELECT comment_idx_seq.currval 
+			FROM dual
+		</selectKey>
 	</insert>
+	
 	<delete id="delete" parameterType="int">
 		DELETE FROM communityComments
  		WHERE idx=#{idx}
 	</delete>
+	
+	<select id="maxOf" resultType="org.iclass.vo.CommunityComments">
+		SELECT MAX(idx) FROM communityComments
+	</select>
+	
+	<select id="comments" parameterType="int" resultType="org.iclass.vo.CommunityComments">
+		SELECT * FROM communityComments
+		WHERE MREF=#{mref}
+	</select>
+	
+	<select id="commentsCount" parameterType="int" resultType="int">
+		SELECT COUNT(*) FROM communityComments 
+		WHERE MREF=#{mref}
+	</select>
+	
 </mapper>

@@ -8,10 +8,12 @@
 <!-- 3. 메인 글삭제 : delete -->
 <!-- 4. 메인 글보기 : select -->
 <mapper namespace="community">		<!-- namespace = 정의된 id를 그룹화 -->
-
-	<insert id="insert" parameterType="org.iclass.vo.Community">
+	<!-- insert,update,delete 는 자동으로 return 값 생성 -->
+	<insert id="insert" parameterType="org.iclass.vo.Community" useGeneratedKeys="false">
+	<!-- Oracle은 idx를 sequence를 이용하여 값 생성, useGeneratedKeys="false" -->
 		INSERT INTO community (idx,writer,title,content)
 		VALUES (community_idx_seq.nextval,#{writer},#{title},#{content})
+		<!-- insert 후에 증가된 sequence값 (현재값) 가져오기 : idx field에 저장 -->
 		<selectKey keyProperty="idx" resultType="long" order="AFTER">
 			SELECT community_idx_seq.currval 
 			FROM dual
@@ -33,4 +35,28 @@
 		SELECT * FROM community WHERE idx=#{idx}
 	</select>
 	
+	<select id="count" resultType="int">
+		SELECT COUNT(*) FROM community
+	</select>
+	
+	<select id="maxOf" resultType="int">
+		SELECT MAX(idx) FROM community
+	</select>
+	
+	<update id="setReadCount" parameterType="int">
+		UPDATE community 
+		SET READCOUNT = READCOUNT + 1
+		WHERE idx=#{idx};
+	</update>
+	
+	<update id="setCommentCount" parameterType="int">
+		UPDATE community
+		SET COMMENTCOUNT =
+			(SELECT COUNT(*) FROM communityComments WHERE MREF=#{idx})
+		WHERE IDX=#{idx}
+	</update>
+	
+	<select id="list" resultType="org.iclass.vo.Community">
+		SELECT * FROM community
+	</select>
 </mapper>
