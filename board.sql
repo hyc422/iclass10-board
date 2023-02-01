@@ -53,6 +53,9 @@ VALUES (community_idx_seq.nextval, '이사나','정회원 공88지','정회원 �
 
 SELECT * FROM community f ;
 
+DELETE FROM community
+WHERE idx='10' AND WRITER='이사나';
+
 -- 댓글 테이블 데이터
 INSERT INTO communityComments (idx,mref,writer,content)
 VALUES (comment_idx_seq.nextval,3,'이하니','이글은 메인글 3번 댓글~');
