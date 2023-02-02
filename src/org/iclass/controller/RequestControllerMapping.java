@@ -12,6 +12,16 @@ public class RequestControllerMapping
 		mapping.put(new RequestKeyValue("/community/list","GET"), new ListController());
 		mapping.put(new RequestKeyValue("/community/write","GET"), new WriteViewController());
 		mapping.put(new RequestKeyValue("/community/write","POST"), new WriteController());	
+		// 회원가입
+		mapping.put(new RequestKeyValue("/member/join","GET"), null);	
+		mapping.put(new RequestKeyValue("/member/join","POST"), null);	
+		// 회원정보수정
+		mapping.put(new RequestKeyValue("/member/modify","GET"), null);	
+		mapping.put(new RequestKeyValue("/member/modify","POST"), null);	
+		// login
+		mapping.put(new RequestKeyValue("/login","GET"), null);	
+		mapping.put(new RequestKeyValue("/login","POST"), null);	
+		mapping.put(new RequestKeyValue("/logout","GET"), null);	
 	}
 	
 	public static Controller getController(RequestKeyValue key)
